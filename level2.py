@@ -1,10 +1,9 @@
 import pygame, sys
-import level2
 
 
  
 from pygame.locals import *
-def main():
+def level():
  pygame.init() # initiates pygame
  clock = pygame.time.Clock()
 
@@ -41,7 +40,7 @@ def main():
     return game_map
     
 
- game_map = load_map('map')
+ game_map = load_map('map2')
 
  grass_img = pygame.image.load('grass.png')
  dirt_img = pygame.image.load('dirt.png')
@@ -102,7 +101,7 @@ def main():
 
     if player_rect.x == 899 and player_rect.y == 83 or player_rect.x == 899+1 or player_rect.x == 899+2 or player_rect.x == 899+3 or player_rect.x == 899+4 or player_rect.x == 899+5 or player_rect.x == 899+6 or player_rect.x == 899+7 or player_rect.x == 899+8 or player_rect.x == 899+9 or player_rect.x == 899+10 or player_rect.x == 899-1 or player_rect.x == 899-2 or player_rect.x == 899-3 or player_rect.x == 899-4 or player_rect.x == 899-5 or player_rect.x == 899-6 :
         levelcomp = True
-        level = font2.render("Press Shift  For Next Level", False, (255, 255, 255))
+        level = font2.render("Next Level Coming Out Soon", False, (255, 255, 255))
         rect = level.get_rect()
         rect.center = display.get_rect().center
         display.blit(level, rect)
@@ -190,9 +189,9 @@ def main():
             if event.key == K_LEFT:
                 moving_left = False
             if event.key == pygame.K_r and game_over == True:
-                main()
-            if event.key == K_RSHIFT or event.key == K_LSHIFT  and levelcomp == True :
-                level2.level()   
+                level()
+            if event.key == K_SPACE and levelcomp == True :
+                print("Coming Out Soon")   
              
             
         
@@ -201,4 +200,3 @@ def main():
     clock.tick(60)
 
     
-main()
