@@ -1,5 +1,6 @@
 import pygame, sys
 import level2
+from pygame import mixer
 
 
  
@@ -27,6 +28,7 @@ def main():
  font2 = font = pygame.font.Font('freesansbold.ttf', 20)
  bg1 = pygame.image.load("bg.png")
  bg = pygame.transform.scale(bg1,(300,200))
+ 
 
  true_scroll = [0,0]
 
@@ -43,15 +45,20 @@ def main():
 
  game_map = load_map('map')
 
+
  grass_img = pygame.image.load('grass.png')
  dirt_img = pygame.image.load('dirt.png')
  portal_img = pygame.image.load('Portall.png')
+ 
 
 
  player_img = pygame.image.load('player.png').convert()
  player_img.set_colorkey((255,255,255))
+ enemy_img = pygame.image.load('enemys.png').convert()
 
  player_rect = pygame.Rect(100,100,5,13)
+ enemy_rect = pygame.Rect(228,99,16,16)
+ 
  
 
 
@@ -94,6 +101,7 @@ def main():
     display.blit(bg,(0,0))
     
     
+    
     if player_rect.y > 400:
         game_over = True
         print("Death")
@@ -105,6 +113,7 @@ def main():
         level = font2.render("Press Shift  For Next Level", False, (255, 255, 255))
         rect = level.get_rect()
         rect.center = display.get_rect().center
+        display.fill((0,0,0))
         display.blit(level, rect)
        
     
@@ -116,6 +125,7 @@ def main():
         gameover = font.render("Press R to Respawn", False, (255, 255, 255))
         rect = gameover.get_rect()
         rect.center = display.get_rect().center
+        display.fill((0,0,0))
         display.blit(gameover, rect)
        
     
@@ -156,6 +166,8 @@ def main():
     vertical_momentum += 0.2
     if vertical_momentum > 3:
         vertical_momentum = 3
+    
+    
 
     player_rect,collisions = move(player_rect,player_movement,tile_rects)
 
@@ -166,6 +178,15 @@ def main():
         air_timer += 1
 
     display.blit(player_img,(player_rect.x-scroll[0],player_rect.y-scroll[1]))
+    display.blit(enemy_img,(enemy_rect.x-scroll[0],enemy_rect.y-scroll[1]))
+
+    if player_rect.colliderect(enemy_rect):
+        game_over = True
+        gameover = font.render("Press R to Respawn", False, (255, 255, 255))
+        rect = gameover.get_rect()
+        rect.center = display.get_rect().center
+        display.blit
+        display.blit(gameover, rect) 
     
    
     
@@ -192,13 +213,15 @@ def main():
             if event.key == pygame.K_r and game_over == True:
                 main()
             if event.key == K_RSHIFT or event.key == K_LSHIFT  and levelcomp == True :
-                level2.level()   
+                level2.main()   
              
             
         
     screen.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
     pygame.display.update()
     clock.tick(60)
+    
+    
 
     
 main()

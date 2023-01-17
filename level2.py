@@ -3,7 +3,7 @@ import pygame, sys
 
  
 from pygame.locals import *
-def level():
+def main():
  pygame.init() # initiates pygame
  clock = pygame.time.Clock()
 
@@ -189,7 +189,7 @@ def level():
             if event.key == K_LEFT:
                 moving_left = False
             if event.key == pygame.K_r and game_over == True:
-                level()
+                main()
             if event.key == K_SPACE and levelcomp == True :
                 print("Coming Out Soon")   
              
