@@ -190,8 +190,11 @@ def main():
                 moving_left = False
             if event.key == pygame.K_r and game_over == True:
                 main()
-            if event.key == K_SPACE and levelcomp == True :
-                print("Coming Out Soon")   
+            if event.key == K_RSHIFT and levelcomp == True :
+                gameover = font.render("Next Level ", False, (255, 255, 255))
+                rect = gameover.get_rect()
+                rect.center = display.get_rect().center
+                display.blit(gameover, rect)  
              
             
         

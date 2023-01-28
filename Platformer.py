@@ -1,6 +1,6 @@
 import pygame, sys
 import level2
-from pygame import mixer
+
 
 
  
@@ -55,9 +55,11 @@ def main():
  player_img = pygame.image.load('player.png').convert()
  player_img.set_colorkey((255,255,255))
  enemy_img = pygame.image.load('enemys.png').convert()
+ star_img = pygame.image.load('star.png').convert()
 
  player_rect = pygame.Rect(100,100,5,13)
  enemy_rect = pygame.Rect(228,99,16,16)
+ star_rect = pygame.Rect(400,99,16,17)
  
  
 
@@ -109,13 +111,7 @@ def main():
     
 
     if player_rect.x == 899 and player_rect.y == 83 or player_rect.x == 899+1 or player_rect.x == 899+2 or player_rect.x == 899+3 or player_rect.x == 899+4 or player_rect.x == 899+5 or player_rect.x == 899+6 or player_rect.x == 899+7 or player_rect.x == 899+8 or player_rect.x == 899+9 or player_rect.x == 899+10 or player_rect.x == 899-1 or player_rect.x == 899-2 or player_rect.x == 899-3 or player_rect.x == 899-4 or player_rect.x == 899-5 or player_rect.x == 899-6 :
-        levelcomp = True
-        level = font2.render("Press Shift  For Next Level", False, (255, 255, 255))
-        rect = level.get_rect()
-        rect.center = display.get_rect().center
-        display.fill((0,0,0))
-        display.blit(level, rect)
-       
+        level2.main()
     
 
 
@@ -179,6 +175,7 @@ def main():
 
     display.blit(player_img,(player_rect.x-scroll[0],player_rect.y-scroll[1]))
     display.blit(enemy_img,(enemy_rect.x-scroll[0],enemy_rect.y-scroll[1]))
+    display.blit(star_img,(star_rect.x-scroll[0],star_rect.y-scroll[1]))
 
     if player_rect.colliderect(enemy_rect):
         game_over = True
@@ -186,7 +183,14 @@ def main():
         rect = gameover.get_rect()
         rect.center = display.get_rect().center
         display.blit
-        display.blit(gameover, rect) 
+        display.blit(gameover, rect)
+    
+   
+     
+   
+
+
+
     
    
     
@@ -212,8 +216,8 @@ def main():
                 moving_left = False
             if event.key == pygame.K_r and game_over == True:
                 main()
-            if event.key == K_RSHIFT or event.key == K_LSHIFT  and levelcomp == True :
-                level2.main()   
+            
+
              
             
         
