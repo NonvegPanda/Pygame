@@ -23,7 +23,7 @@ def main():
  Run = True
  game_over = False
  font = pygame.font.Font('freesansbold.ttf', 30)
- font2 = font = pygame.font.Font('freesansbold.ttf', 20)
+ font2 =  pygame.font.Font('freesansbold.ttf', 20)
  bg1 = pygame.image.load("bg.png")
  bg = pygame.transform.scale(bg1,(300,200))
 
@@ -195,11 +195,21 @@ def main():
                 rect = gameover.get_rect()
                 rect.center = display.get_rect().center
                 display.blit(gameover, rect)  
+
+    level_show = font2.render("Level : 2", False, (255, 255, 255))
+    rect2 = level_show.get_rect()
+    rect2.topright = display.get_rect().topright
+    display.blit
+    display.blit(level_show, rect2)
              
             
         
     screen.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
     pygame.display.update()
     clock.tick(60)
+    
+    print(f"X:{player_rect.x}")
+    print(f"Y:{player_rect.y}")
+    
 
     
