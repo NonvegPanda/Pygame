@@ -55,9 +55,12 @@ def main():
  player_img = pygame.image.load('player.png').convert()
  player_img.set_colorkey((255,255,255))
  enemy_img = pygame.image.load('enemys.png').convert()
+ chest_img = pygame.image.load('chest.png').convert()
  
  player_rect = pygame.Rect(100,100,5,13)
  enemy_rect = pygame.Rect(228,99,16,16)
+ chest_rect = pygame.Rect(156,31,16,16)
+ speedup = False
  
  
 
@@ -174,6 +177,7 @@ def main():
 
     display.blit(player_img,(player_rect.x-scroll[0],player_rect.y-scroll[1]))
     display.blit(enemy_img,(enemy_rect.x-scroll[0],enemy_rect.y-scroll[1]))
+    display.blit(chest_img,(chest_rect.x-scroll[0],chest_rect.y-scroll[1]))
     
     if player_rect.colliderect(enemy_rect):
         game_over = True
@@ -182,7 +186,9 @@ def main():
         rect.center = display.get_rect().center
         display.blit
         display.blit(gameover, rect)
-
+    if player_rect.colliderect(chest_rect):
+        speedup = True
+        
 
     
      
@@ -232,7 +238,13 @@ def main():
         
     screen.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
     pygame.display.update()
-    clock.tick(60)
+    def speed():
+     clock.tick(60)
+    if speedup == False:
+
+        speed()
+    if speedup == True:
+        clock.tick(80)
     
     print(f"X:{player_rect.x}")
     print(f"Y:{player_rect.y}")
