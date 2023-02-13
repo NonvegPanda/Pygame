@@ -1,5 +1,5 @@
 import pygame, sys
-import level2
+
 
 
  
@@ -42,7 +42,7 @@ def main():
     return game_map
     
 
- game_map = load_map('map')
+ game_map = load_map('map3')
 
 
  grass_img = pygame.image.load('grass.png')
@@ -111,7 +111,7 @@ def main():
     
 
     if player_rect.x == 899 and player_rect.y == 83 or player_rect.x == 899+1 or player_rect.x == 899+2 or player_rect.x == 899+3 or player_rect.x == 899+4 or player_rect.x == 899+5 or player_rect.x == 899+6 or player_rect.x == 899+7 or player_rect.x == 899+8 or player_rect.x == 899+9 or player_rect.x == 899+10 or player_rect.x == 899-1 or player_rect.x == 899-2 or player_rect.x == 899-3 or player_rect.x == 899-4 or player_rect.x == 899-5 or player_rect.x == 899-6 :
-        level2.main()
+        print("Level Is Not Available")
         
     
 
@@ -213,13 +213,6 @@ def main():
                 moving_right = True
             if event.key == K_LEFT:
                 moving_left = True
-            if event.key == K_d:
-                moving_right = True
-            if event.key == K_a:
-                moving_left = True
-            if event.key == K_SPACE:
-                if air_timer < 6:
-                    vertical_momentum = -5
             if event.key == K_UP:
                 if air_timer < 6:
                     vertical_momentum = -5
@@ -227,10 +220,6 @@ def main():
             if event.key == K_RIGHT:
                 moving_right = False
             if event.key == K_LEFT:
-                moving_left = False
-            if event.key == K_d:
-                moving_right = False
-            if event.key == K_a:
                 moving_left = False
             if event.key == pygame.K_r and game_over == True:
                 main()
@@ -262,4 +251,3 @@ def main():
     
 
     
-main()

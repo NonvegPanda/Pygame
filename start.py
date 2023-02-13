@@ -1,6 +1,5 @@
 import pygame, sys
-import level2
-
+import Platformer
 
  
 from pygame.locals import *
@@ -24,10 +23,9 @@ def main():
  Run = True
  game_over = False
  font = pygame.font.Font('freesansbold.ttf', 30)
- font2 = pygame.font.Font('freesansbold.ttf', 20)
+ font2 =  pygame.font.Font('freesansbold.ttf', 20)
  bg1 = pygame.image.load("bg.png")
  bg = pygame.transform.scale(bg1,(300,200))
- 
 
  true_scroll = [0,0]
 
@@ -42,25 +40,19 @@ def main():
     return game_map
     
 
- game_map = load_map('map')
-
+ game_map = load_map('start')
 
  grass_img = pygame.image.load('grass.png')
  dirt_img = pygame.image.load('dirt.png')
  portal_img = pygame.image.load('Portall.png')
- 
 
 
  player_img = pygame.image.load('player.png').convert()
  player_img.set_colorkey((255,255,255))
- enemy_img = pygame.image.load('enemys.png').convert()
- chest_img = pygame.image.load('chest.png').convert()
- 
+
  player_rect = pygame.Rect(100,100,5,13)
- enemy_rect = pygame.Rect(228,99,16,16)
- chest_rect = pygame.Rect(156,31,16,16)
- speedup = False
- current_time= 0
+ 
+
 
 
  
@@ -100,10 +92,7 @@ def main():
  while Run == True: # game loop
     display.blit(bg,(0,0))
     
-    current_time = pygame.time.get_ticks()
-    print(current_time)
     
-
     if player_rect.y > 400:
         game_over = True
         print("Death")
@@ -111,8 +100,12 @@ def main():
     
 
     if player_rect.x == 899 and player_rect.y == 83 or player_rect.x == 899+1 or player_rect.x == 899+2 or player_rect.x == 899+3 or player_rect.x == 899+4 or player_rect.x == 899+5 or player_rect.x == 899+6 or player_rect.x == 899+7 or player_rect.x == 899+8 or player_rect.x == 899+9 or player_rect.x == 899+10 or player_rect.x == 899-1 or player_rect.x == 899-2 or player_rect.x == 899-3 or player_rect.x == 899-4 or player_rect.x == 899-5 or player_rect.x == 899-6 :
-        level2.main()
-        
+        levelcomp = True
+        level = font2.render("Next Level Coming Out Soon", False, (255, 255, 255))
+        rect = level.get_rect()
+        rect.center = display.get_rect().center
+        display.blit(level, rect)
+       
     
 
 
@@ -122,7 +115,6 @@ def main():
         gameover = font.render("Press R to Respawn", False, (255, 255, 255))
         rect = gameover.get_rect()
         rect.center = display.get_rect().center
-        display.fill((0,0,0))
         display.blit(gameover, rect)
        
     
@@ -163,8 +155,6 @@ def main():
     vertical_momentum += 0.2
     if vertical_momentum > 3:
         vertical_momentum = 3
-    
-    
 
     player_rect,collisions = move(player_rect,player_movement,tile_rects)
 
@@ -175,29 +165,6 @@ def main():
         air_timer += 1
 
     display.blit(player_img,(player_rect.x-scroll[0],player_rect.y-scroll[1]))
-    display.blit(enemy_img,(enemy_rect.x-scroll[0],enemy_rect.y-scroll[1]))
-    display.blit(chest_img,(chest_rect.x-scroll[0],chest_rect.y-scroll[1]))
-    
-    if player_rect.colliderect(enemy_rect):
-        game_over = True
-        gameover = font.render("Press R to Respawn", False, (255, 255, 255))
-        rect = gameover.get_rect()
-        rect.center = display.get_rect().center
-        display.blit
-        display.blit(gameover, rect)
-    if player_rect.colliderect(chest_rect):
-        speedup = True
-        
-
-    
-     
-    
-   
-     
-   
-
-
-
     
    
     
@@ -213,13 +180,6 @@ def main():
                 moving_right = True
             if event.key == K_LEFT:
                 moving_left = True
-            if event.key == K_d:
-                moving_right = True
-            if event.key == K_a:
-                moving_left = True
-            if event.key == K_SPACE:
-                if air_timer < 6:
-                    vertical_momentum = -5
             if event.key == K_UP:
                 if air_timer < 6:
                     vertical_momentum = -5
@@ -228,38 +188,28 @@ def main():
                 moving_right = False
             if event.key == K_LEFT:
                 moving_left = False
-            if event.key == K_d:
-                moving_right = False
-            if event.key == K_a:
-                moving_left = False
             if event.key == pygame.K_r and game_over == True:
                 main()
+            if event.key == K_RSHIFT and levelcomp == True :
+                gameover = font.render("Next Level ", False, (255, 255, 255))
+                rect = gameover.get_rect()
+                rect.center = display.get_rect().center
+                display.blit(gameover, rect)  
 
-    level_show = font2.render("Level : 1", False, (255, 255, 255))
+    level_show = font2.render("Level : 2", False, (255, 255, 255))
     rect2 = level_show.get_rect()
     rect2.topright = display.get_rect().topright
     display.blit
     display.blit(level_show, rect2)
-    
-           
-
              
             
         
     screen.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
     pygame.display.update()
-    def speed():
-     clock.tick(60)
-    if speedup == False:
-
-        speed()
-    if speedup == True:
-        clock.tick(90)
+    clock.tick(60)
     
     print(f"X:{player_rect.x}")
     print(f"Y:{player_rect.y}")
     
-    
 
-    
-main()
+main()    
