@@ -61,6 +61,7 @@ def main():
  chest_rect = pygame.Rect(156,31,16,16)
  speedup = False
  current_time= 0
+ enemy_move_left = False
 
 
  
@@ -188,7 +189,17 @@ def main():
     if player_rect.colliderect(chest_rect):
         speedup = True
         
+# enemy movement code by surya
+    if enemy_rect.x ==32:
+        enemy_move_left = False
 
+    if enemy_rect.x ==228:
+        enemy_move_left = True
+
+    if enemy_move_left == False:
+        enemy_rect = enemy_rect.move([2,0])
+    else:
+        enemy_rect = enemy_rect.move([-2,0])
     
      
     
