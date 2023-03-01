@@ -59,6 +59,11 @@ def main():
  player_rect = pygame.Rect(100,100,5,13)
  enemy_rect = pygame.Rect(228,99,16,16)
  chest_rect = pygame.Rect(156,31,16,16)
+ level_rect = portal_img.get_rect()
+ level_rect.x =131
+ level_rect.y= 243
+ 
+ 
  speedup = False
  current_time= 0
 
@@ -101,19 +106,18 @@ def main():
     display.blit(bg,(0,0))
     
     current_time = pygame.time.get_ticks()
-    print(current_time)
+    ## usable stuff print(str(current_time[1]))
     
 
     if player_rect.y > 400:
         game_over = True
-        print("Death")
+        
     
     
 
-    if player_rect.x == 899 and player_rect.y == 83 or player_rect.x == 899+1 or player_rect.x == 899+2 or player_rect.x == 899+3 or player_rect.x == 899+4 or player_rect.x == 899+5 or player_rect.x == 899+6 or player_rect.x == 899+7 or player_rect.x == 899+8 or player_rect.x == 899+9 or player_rect.x == 899+10 or player_rect.x == 899-1 or player_rect.x == 899-2 or player_rect.x == 899-3 or player_rect.x == 899-4 or player_rect.x == 899-5 or player_rect.x == 899-6 :
-        print("Level Is Not Available")
+    if player_rect.colliderect(level_rect):
+        print("Next ")
         
-    
 
 
 
@@ -177,6 +181,7 @@ def main():
     display.blit(player_img,(player_rect.x-scroll[0],player_rect.y-scroll[1]))
     display.blit(enemy_img,(enemy_rect.x-scroll[0],enemy_rect.y-scroll[1]))
     display.blit(chest_img,(chest_rect.x-scroll[0],chest_rect.y-scroll[1]))
+    display.blit(portal_img,(level_rect.x-scroll[0],level_rect.y-scroll[1]))
     
     if player_rect.colliderect(enemy_rect):
         game_over = True
@@ -224,7 +229,7 @@ def main():
             if event.key == pygame.K_r and game_over == True:
                 main()
 
-    level_show = font2.render("Level : 1", False, (255, 255, 255))
+    level_show = font2.render("Level : 3", False, (255, 255, 255))
     rect2 = level_show.get_rect()
     rect2.topright = display.get_rect().topright
     display.blit
@@ -250,4 +255,3 @@ def main():
     
     
 
-    

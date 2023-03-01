@@ -59,6 +59,10 @@ def main():
  player_rect = pygame.Rect(100,100,5,13)
  enemy_rect = pygame.Rect(228,99,16,16)
  chest_rect = pygame.Rect(156,31,16,16)
+ level_rect = portal_img.get_rect()
+ level_rect.x =898
+ level_rect.y= 99
+ 
  speedup = False
  current_time= 0
  enemy_move_left = False
@@ -99,10 +103,12 @@ def main():
 
 
  while Run == True: # game loop
+    
     display.blit(bg,(0,0))
     
-    current_time = pygame.time.get_ticks()
-    print(current_time)
+    ## usable stuff current_time = str(pygame.time.get_ticks())
+    
+    
     
 
     if player_rect.y > 400:
@@ -111,7 +117,7 @@ def main():
     
     
 
-    if player_rect.x == 899 and player_rect.y == 83 or player_rect.x == 899+1 or player_rect.x == 899+2 or player_rect.x == 899+3 or player_rect.x == 899+4 or player_rect.x == 899+5 or player_rect.x == 899+6 or player_rect.x == 899+7 or player_rect.x == 899+8 or player_rect.x == 899+9 or player_rect.x == 899+10 or player_rect.x == 899-1 or player_rect.x == 899-2 or player_rect.x == 899-3 or player_rect.x == 899-4 or player_rect.x == 899-5 or player_rect.x == 899-6 :
+    if player_rect.colliderect(level_rect):
         level2.main()
         
     
@@ -147,9 +153,7 @@ def main():
             if tile == '1':
                 display.blit(dirt_img,(x*16-scroll[0],y*16-scroll[1]))
             if tile == '2':
-                display.blit(grass_img,(x*16-scroll[0],y*16-scroll[1]))
-            if tile == '3':
-                display.blit(portal_img,(x*16-scroll[0],y*16-scroll[1]))    
+                display.blit(grass_img,(x*16-scroll[0],y*16-scroll[1]))    
             if tile != '0':
                 tile_rects.append(pygame.Rect(x*16,y*16,16,16))
             x += 1
@@ -178,6 +182,7 @@ def main():
     display.blit(player_img,(player_rect.x-scroll[0],player_rect.y-scroll[1]))
     display.blit(enemy_img,(enemy_rect.x-scroll[0],enemy_rect.y-scroll[1]))
     display.blit(chest_img,(chest_rect.x-scroll[0],chest_rect.y-scroll[1]))
+    display.blit(portal_img,(level_rect.x-scroll[0],level_rect.y-scroll[1]))
     
     if player_rect.colliderect(enemy_rect):
         game_over = True
