@@ -28,6 +28,7 @@ def main():
  bg1 = pygame.image.load("bg.png")
  bg = pygame.transform.scale(bg1,(300,200))
  
+ 
 
  true_scroll = [0,0]
 
@@ -62,7 +63,7 @@ def main():
  level_rect = portal_img.get_rect()
  level_rect.x =131
  level_rect.y= 243
- 
+ enemy_move_left = False
  
  speedup = False
  current_time= 0
@@ -192,6 +193,18 @@ def main():
         display.blit(gameover, rect)
     if player_rect.colliderect(chest_rect):
         speedup = True
+        
+    if enemy_rect.x ==32:
+        enemy_move_left = False
+
+    if enemy_rect.x ==228:
+        enemy_move_left = True
+
+    if enemy_move_left == False:
+        enemy_rect = enemy_rect.move([1,0])
+    else:
+        enemy_rect = enemy_rect.move([-1,0])
+    
         
 
     

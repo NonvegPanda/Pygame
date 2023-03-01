@@ -62,6 +62,7 @@ def main():
  level_rect.x =898
  level_rect.y= 99
  speedup = False
+ enemy_move_left = False
  current_time= 0
 
 
@@ -192,6 +193,18 @@ def main():
         display.blit(gameover, rect)
     if player_rect.colliderect(chest_rect):
         speedup = True
+        
+    if enemy_rect.x ==32:
+        enemy_move_left = False
+
+    if enemy_rect.x ==228:
+        enemy_move_left = True
+
+    if enemy_move_left == False:
+        enemy_rect = enemy_rect.move([1,0])
+    else:
+        enemy_rect = enemy_rect.move([-1,0])
+    
         
 
     

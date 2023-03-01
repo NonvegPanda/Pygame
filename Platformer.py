@@ -202,9 +202,9 @@ def main():
         enemy_move_left = True
 
     if enemy_move_left == False:
-        enemy_rect = enemy_rect.move([2,0])
+        enemy_rect = enemy_rect.move([1,0])
     else:
-        enemy_rect = enemy_rect.move([-2,0])
+        enemy_rect = enemy_rect.move([-1,0])
     
      
     
