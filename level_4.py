@@ -1,5 +1,4 @@
 import pygame, sys
-import level_4
 
 
  
@@ -28,7 +27,6 @@ def main():
  bg1 = pygame.image.load("bg.png")
  bg = pygame.transform.scale(bg1,(300,200))
  
- 
 
  true_scroll = [0,0]
 
@@ -43,7 +41,7 @@ def main():
     return game_map
     
 
- game_map = load_map('map3')
+ game_map = load_map('map4')
 
 
  grass_img = pygame.image.load('grass.png')
@@ -61,11 +59,10 @@ def main():
  enemy_rect = pygame.Rect(228,99,16,16)
  chest_rect = pygame.Rect(156,31,16,16)
  level_rect = portal_img.get_rect()
- level_rect.x =131
- level_rect.y= 243
- enemy_move_left = False
- 
+ level_rect.x =898
+ level_rect.y= 99
  speedup = False
+ enemy_move_left = False
  current_time= 0
 
 
@@ -112,13 +109,15 @@ def main():
 
     if player_rect.y > 400:
         game_over = True
-        
+        print("Death")
     
     
 
+    
     if player_rect.colliderect(level_rect):
-        level_4.main()
+        return
         
+    
 
 
 
@@ -184,6 +183,7 @@ def main():
     display.blit(chest_img,(chest_rect.x-scroll[0],chest_rect.y-scroll[1]))
     display.blit(portal_img,(level_rect.x-scroll[0],level_rect.y-scroll[1]))
     
+    
     if player_rect.colliderect(enemy_rect):
         game_over = True
         gameover = font.render("Press R to Respawn", False, (255, 255, 255))
@@ -242,7 +242,7 @@ def main():
             if event.key == pygame.K_r and game_over == True:
                 main()
 
-    level_show = font2.render("Level : 3", False, (255, 255, 255))
+    level_show = font2.render("Level : 4", False, (255, 255, 255))
     rect2 = level_show.get_rect()
     rect2.topright = display.get_rect().topright
     display.blit
@@ -268,3 +268,4 @@ def main():
     
     
 
+    

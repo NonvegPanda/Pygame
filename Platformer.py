@@ -23,6 +23,7 @@ def main():
  air_timer = 0
  Run = True
  game_over = False
+ update = True
  font = pygame.font.Font('freesansbold.ttf', 30)
  font2 = pygame.font.Font('freesansbold.ttf', 20)
  bg1 = pygame.image.load("bg.png")
@@ -113,6 +114,7 @@ def main():
 
     if player_rect.y > 400:
         game_over = True
+        update = False
         print("Death")
     
     
@@ -191,6 +193,8 @@ def main():
         rect.center = display.get_rect().center
         display.blit
         display.blit(gameover, rect)
+        
+        update = False
     if player_rect.colliderect(chest_rect):
         speedup = True
         
@@ -249,6 +253,8 @@ def main():
             if event.key == K_a:
                 moving_left = False
             if event.key == pygame.K_r and game_over == True:
+                
+                update = True
                 main()
 
     level_show = font2.render("Level : 1", False, (255, 255, 255))
@@ -263,7 +269,11 @@ def main():
             
         
     screen.blit(pygame.transform.scale(display,WINDOW_SIZE),(0,0))
+   
+         
+    
     pygame.display.update()
+    
     def speed():
      clock.tick(60)
     if speedup == False:
