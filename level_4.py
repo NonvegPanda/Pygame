@@ -10,11 +10,11 @@ def main():
 
  pygame.display.set_caption('Pygame Platformer')
 
- WINDOW_SIZE = (600,400)
+ WINDOW_SIZE = (800,600)
 
  screen = pygame.display.set_mode(WINDOW_SIZE,0,32) # initiate the window
 
- display = pygame.Surface((300,200)) # used as the surface for rendering, which is scaled
+ display = pygame.Surface((500,400)) # used as the surface for rendering, which is scaled
 
  moving_right = False
  moving_left = False
@@ -25,7 +25,7 @@ def main():
  font = pygame.font.Font('freesansbold.ttf', 30)
  font2 = pygame.font.Font('freesansbold.ttf', 20)
  bg1 = pygame.image.load("bg.png")
- bg = pygame.transform.scale(bg1,(300,200))
+ bg = pygame.transform.scale(bg1,(500,400))
  
 
  true_scroll = [0,0]
@@ -50,17 +50,17 @@ def main():
  
 
 
- player_img = pygame.image.load('player.png').convert()
+ player_img = pygame.image.load('player (2).png').convert_alpha()
  player_img.set_colorkey((255,255,255))
- enemy_img = pygame.image.load('enemys.png').convert()
- chest_img = pygame.image.load('chest.png').convert()
+ enemy_img = pygame.image.load('enemys.png').convert_alpha()
+ chest_img = pygame.image.load('chest.png').convert_alpha()
  
- player_rect = pygame.Rect(100,100,5,13)
+ player_rect = pygame.Rect(100,100,12,24)
  enemy_rect = pygame.Rect(228,99,16,16)
  chest_rect = pygame.Rect(156,31,16,16)
  level_rect = portal_img.get_rect()
- level_rect.x =898
- level_rect.y= 99
+ level_rect.x =1105
+ level_rect.y= 227
  speedup = False
  enemy_move_left = False
  current_time= 0
